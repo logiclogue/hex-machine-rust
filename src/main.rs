@@ -2,40 +2,29 @@ fn main() {
     println!("Hello, world!");
 }
 
-struct Memory(Vec<u8>);
+struct Memory([u8; 256]);
 
 impl Memory {
-    fn read(&self, address: u32) -> u8 {
-        42
+    fn new() -> Self {
+        Memory([0; 256])
     }
 
-    fn write(self, address: u32, value: u8) -> Memory {
+    fn read(&self, address: u8) -> u8 {
+        self.0[address as usize]
+    }
+
+    fn write(&mut self, address: u8, value: u8) -> &Memory {
+        self.0[address as usize] = value;
+
         self
     }
 }
 
 #[test]
-fn memory_read_given_42_returns_42() {
-    let address = 145;
-    let value = 42;
-    let memory = Memory(vec![1]).write(address, value);
+fn test_memory_write_at_42_100_reads_100() {
+    let mut memory = Memory::new();
 
-    assert_eq!(memory.read(address), 42);
-}
+    memory.write(42, 100);
 
-#[test]
-fn memory_read_given_1_returns_1() {
-    let memory = Memory(vec![1]);
-    let address = 1;
-
-    assert_eq!(memory.read(address), 1);
-}
-
-#[test]
-fn sandbox() {
-    let my_array = vec![42, 1, 2];
-
-    let result: u8 = my_array.iter().sum();
-
-    assert_eq!(result, 45);
+    assert_eq!(memory.read(42), 100);
 }
