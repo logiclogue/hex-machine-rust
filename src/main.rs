@@ -32,3 +32,32 @@ fn test_memory_write_at_42_100_reads_100() {
 
     assert_eq!(memory.read(42), 100);
 }
+
+enum Instruction {
+    LDAM,
+    LDBM,
+    STAM,
+    LDAC,
+    LDBC,
+    LDAP,
+    LDAI,
+    LDBI,
+    STAI,
+    BR,
+    BRZ,
+    BRN,
+    BRB,
+    ADD,
+    SUB,
+    PFIX
+}
+
+#[test]
+fn test_instruction() {
+    let instruction = Instruction::LDAM;
+
+    match instruction {
+        Instruction::LDAM => assert!(true),
+        _                 => assert!(false)
+    }
+}
