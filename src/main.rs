@@ -6,6 +6,14 @@ fn main() {
     println!("{}", memory.read(0x00));
 }
 
+struct Machine {
+    o_reg: u8,
+    a_reg: u8,
+    b_reg: u8,
+    pc: u8,
+    running: bool
+}
+
 struct Memory([u8; 256]);
 
 impl Memory {
