@@ -107,6 +107,12 @@ enum Instruction {
     PFIX
 }
 
+impl Instruction {
+    fn execute(self, machine: Machine) -> Machine {
+        machine
+    }
+}
+
 #[test]
 fn test_instruction() {
     let instruction = Instruction::LDAM;
@@ -115,4 +121,16 @@ fn test_instruction() {
         Instruction::LDAM => assert!(true),
         _                 => assert!(false)
     }
+}
+
+#[test]
+fn instruction_execute_ldam_works() {
+    let instruction = Instruction::LDAM;
+    let mut machine = Machine::new();
+
+    machine.o_reg = 10;
+
+    machine = instruction.execute(machine);
+
+    assert_eq!(machine.o_reg, 0);
 }
