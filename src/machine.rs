@@ -16,6 +16,26 @@ impl Machine {
             running: false
         }
     }
+
+    pub fn set_o_reg(self, value: u8) -> Self {
+        Machine {
+            o_reg: value,
+            a_reg: self.a_reg,
+            b_reg: self.b_reg,
+            pc: self.pc,
+            running: self.running
+        }
+    }
+
+    pub fn set_a_reg(self, value: u8) -> Self {
+        Machine {
+            o_reg: self.o_reg,
+            a_reg: value,
+            b_reg: self.b_reg,
+            pc: self.pc,
+            running: self.running
+        }
+    }
 }
 
 #[test]
