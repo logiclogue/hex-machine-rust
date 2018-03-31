@@ -36,6 +36,16 @@ impl Machine {
             running: self.running
         }
     }
+
+    pub fn set_b_reg(self, value: u8) -> Self {
+        Machine {
+            o_reg: self.o_reg,
+            a_reg: self.a_reg,
+            b_reg: value,
+            pc: self.pc,
+            running: self.running
+        }
+    }
 }
 
 #[test]
