@@ -21,13 +21,17 @@ pub enum Instruction {
 }
 
 impl Instruction {
-    pub fn execute(self, machine: Machine, memory: Memory) -> (Machine, Memory) {
+    pub fn execute(self, machine: Machine, mut memory: Memory) -> (Machine, Memory) {
         let read_value = memory.read(machine.o_reg);
 
         (match self {
             Instruction::LDAM => machine.set_a_reg(read_value).set_o_reg(0),
             Instruction::LDBM => machine.set_b_reg(read_value).set_o_reg(0),
-            Instruction::STAM => machine.set_o_reg(0),
+            Instruction::STAM => {
+                memory.write(machine.o_reg, machine.a_reg);
+
+                machine.set_o_reg(0)
+            },
             _                 => machine
         }, memory)
     }
